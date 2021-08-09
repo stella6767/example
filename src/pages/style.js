@@ -6,7 +6,7 @@ export const StyledMainDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(500px, 1fr)
+    minmax(800px, 1fr)
   );
   row-gap: 2rem;
   column-gap: 2rem;

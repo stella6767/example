@@ -9,7 +9,7 @@ const PatientInfo = memo((props) => {
       <Card
         title="Default size card"
         extra={<a href="#">More</a>}
-        style={{ width: 600 }}
+        style={{ width: 800 }}
       >
         <p>{content}</p>
         <p>Card content</p>
