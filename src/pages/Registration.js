@@ -44,16 +44,16 @@ const Registration = memo(() => {
       >
         <div className="registerForm">
           <Form
-            name="basic"
-            labelCol={{ span: 1 }}
-            wrapperCol={{ span: 4 }}
+            name="register"
+            labelCol={{ span: 0 }}
+            wrapperCol={{ span: 12 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label="Username"
-              name="username"
+              label="ID"
+              name="ID"
               rules={[
                 {
                   required: true,
@@ -66,8 +66,8 @@ const Registration = memo(() => {
             </Form.Item>
 
             <Form.Item
-              label="Password"
-              name="password"
+              label="AGE"
+              name="AGE"
               rules={[
                 {
                   required: true,
@@ -80,14 +80,88 @@ const Registration = memo(() => {
             </Form.Item>
 
             <Form.Item
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{ offset: 1, span: 4 }}
-            ></Form.Item>
+              label="First Name"
+              name="First Name"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
             <Form.Item
-              wrapperCol={{ offset: 1, span: 4 }}
-            ></Form.Item>
+              label="Height"
+              name="Height"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              label="LAST NAME"
+              name="LAST NAME"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Weight"
+              name="Weight"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              label="GENDER"
+              name="GENDER"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Comment"
+              name="Comment"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
           </Form>
         </div>
       </SlidingPane>
