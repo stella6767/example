@@ -1,19 +1,15 @@
 import { Card } from 'antd';
 import React, { memo } from 'react';
+import LineChart from './LineChart';
 
 const PatientInfo = memo((props) => {
   const { content } = props;
 
   return (
     <>
-      <Card
-        title="Default size card"
-        extra={<a href="#">More</a>}
-        style={{ width: 800 }}
-      >
-        <p>{content}</p>
-        <p>Card content</p>
-      </Card>
+      <div>
+        <LineChart />
+      </div>
     </>
   );
 });
