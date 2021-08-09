@@ -1,3 +1,5 @@
+import { Checkbox, Form, Input } from 'antd';
+import { Button } from 'antd/lib/radio';
 import React, { memo, useState } from 'react';
 
 import SlidingPane from 'react-sliding-pane';
@@ -9,6 +11,14 @@ const Registration = memo(() => {
     isPaneOpenLeft: false,
     isPaneOpenBottom: false,
   });
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <>
@@ -28,13 +38,57 @@ const Registration = memo(() => {
         title="회원가입"
         from="bottom"
         width="100%"
-        height="50%"
         onRequestClose={() =>
           setState({ isPaneOpenBottom: false })
         }
       >
-        <div>
-          And I am pane content on Bottom.
+        <div className="registerForm">
+          <Form
+            name="basic"
+            labelCol={{ span: 1 }}
+            wrapperCol={{ span: 4 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              name="remember"
+              valuePropName="checked"
+              wrapperCol={{ offset: 1, span: 4 }}
+            ></Form.Item>
+
+            <Form.Item
+              wrapperCol={{ offset: 1, span: 4 }}
+            ></Form.Item>
+          </Form>
         </div>
       </SlidingPane>
     </>
