@@ -21,7 +21,7 @@ export const StyledRegisterFormDiv = styled.div`
   padding-right: 5rem;
 `;
 
-export const StyledRegisterForm = styled(Form)`
+export const StyledRegisterForm = styled.form`
   //flex-wrap: nowrap;
   display: grid;
   grid-template-columns: repeat(
