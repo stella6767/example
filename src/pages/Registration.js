@@ -1,9 +1,15 @@
-import { Checkbox, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 import { Button } from 'antd/lib/radio';
 import React, { memo, useState } from 'react';
 
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
+import {
+  Global,
+  StyldRegisterFormItem,
+  StyledRegisterForm,
+  StyledRegisterFormDiv,
+} from './style';
 
 const Registration = memo(() => {
   const [state, setState] = useState({
@@ -12,23 +18,22 @@ const Registration = memo(() => {
     isPaneOpenBottom: false,
   });
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
+  const [registerForm] = Form.useForm();
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+  const onJoinFinish = (values) => {
+    console.log(values);
   };
 
   return (
     <>
+      <Global />
       <div>
         <button
           onClick={() =>
             setState({ isPaneOpenBottom: true })
           }
         >
-          fsdsdfa
+          회원가입 division view
         </button>
       </div>
 
@@ -42,128 +47,45 @@ const Registration = memo(() => {
           setState({ isPaneOpenBottom: false })
         }
       >
-        <div className="registerForm">
-          <Form
-            name="register"
-            labelCol={{ span: 0 }}
-            wrapperCol={{ span: 12 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+        <StyledRegisterFormDiv>
+          <StyledRegisterForm
+            form={registerForm}
+            name="patient_register"
+            onFinish={onJoinFinish}
           >
             <Form.Item
               label="ID"
-              name="ID"
+              name="id"
               rules={[
                 {
                   required: true,
-                  message:
-                    'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[
+                {
+                  required: true,
                 },
               ]}
             >
               <Input />
             </Form.Item>
 
-            <Form.Item
-              label="AGE"
-              name="AGE"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password />
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+              >
+                Submit
+              </Button>
             </Form.Item>
-
-            <Form.Item
-              label="First Name"
-              name="First Name"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your username!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Height"
-              name="Height"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-              label="LAST NAME"
-              name="LAST NAME"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your username!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Weight"
-              name="Weight"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-              label="GENDER"
-              name="GENDER"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your username!',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Comment"
-              name="Comment"
-              rules={[
-                {
-                  required: true,
-                  message:
-                    'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-          </Form>
-        </div>
+          </StyledRegisterForm>
+        </StyledRegisterFormDiv>
       </SlidingPane>
     </>
   );
