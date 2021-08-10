@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import AppLayout from '../components/AppLayout';
 import PatientInfo from '../components/PatientInfo';
-import { loadPostsAction } from '../reducers/patient';
+import { loadPatientsAction } from '../reducers/patient';
 import { Global } from '../style';
 import { StyledMainDiv } from './style';
 
@@ -18,9 +18,9 @@ const Home = memo(() => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPostsAction());
+    dispatch(loadPatientsAction());
     console.log('더미데이터 최초 한번 받아옴');
-    dispatch(loadPostsAction(10));
+    dispatch(loadPatientsAction(10));
   }, []);
 
   return (

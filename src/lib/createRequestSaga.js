@@ -42,12 +42,13 @@ export default function createFakeRequestSaga(
 
       console.log(
         'fake Data:',
-        generateDummyPost(action.payload),
+        //generateDummyPost(action.payload),
+        generateDummyPatientList(action.payload),
       );
 
       yield put({
         type: SUCCESS,
-        payload: generateDummyPost(
+        payload: generateDummyPatientList(
           action.payload,
         ),
       });
@@ -71,4 +72,18 @@ const generateDummyPost = (number) =>
     .map(() => ({
       id: shortId.generate(),
       content: faker.lorem.paragraph(),
+    }));
+
+//이거 patient manager 하실 때 키값도 같이 주세요.
+const generateDummyPatientList = (number) =>
+  Array(number)
+    .fill()
+    .map(() => ({
+      id: shortId.generate(),
+      name: faker.name.findName(),
+      lastSession: 'Last session',
+      gender: faker.name.gender(),
+      age: faker.datatype.number(),
+      height: faker.datatype.number(),
+      weight: faker.datatype.number(),
     }));

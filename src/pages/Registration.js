@@ -1,10 +1,13 @@
 import { Input } from 'antd';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
+import Radio, { Button } from 'antd/lib/radio';
 
 import React, {
   memo,
   useEffect,
   useState,
 } from 'react';
+import { useForm } from 'react-hook-form';
 
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -22,40 +25,21 @@ const Registration = memo(() => {
     isPaneOpenBottom: false,
   });
 
-  const onJoinFinish = (values) => {
-    console.log(values);
+  const { register, handleSubmit } = useForm();
+
+  //const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    //dispatch(~~ACtion(data)); //요렇게 호출하세요.
   };
 
-  const [register, setRegister] = useState({
-    id: '',
-    age: '',
-    firstName: '',
-    height: '',
-    lastName: '',
-    weight: '',
-    gender: '',
-    comment: '',
-  });
+  const [value, setValue] = React.useState(null);
 
-  useEffect(() => {
-    console.log('실시간 register', register);
-  }, [register]);
-
-  const handleWrite = (e) => {
-    e.preventDefault(); // form태그가 하려는 액션을 중지 시켜야 함.
-    console.log('가입');
-    setRegister(register);
-  };
-
-  const handleForm = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
-
-    //computed property names 문법(키 값 동적할당)
-    setRegister({
-      ...register,
-      [e.target.name]: e.target.value,
-    }); //변수 키값을 동적으로 만들어냄...자바에는 없는 문법
+  const onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
   };
 
   return (
@@ -74,7 +58,7 @@ const Registration = memo(() => {
       <SlidingPane
         closeIcon={<div>close</div>}
         isOpen={state.isPaneOpenBottom}
-        title="회원가입"
+        title="Patient Registration"
         from="bottom"
         width="100%"
         onRequestClose={() =>
@@ -82,47 +66,81 @@ const Registration = memo(() => {
         }
       >
         <StyledRegisterFormDiv>
-          <StyledRegisterForm
-            name="patient_register"
-            onFinish={onJoinFinish}
-          >
+          <StyledRegisterForm name="patient_register">
             <StyldRegisterFormItem>
               <div>ID</div>
+              <Input {...register('ID')} />
+            </StyldRegisterFormItem>
+
+            <StyldRegisterFormItem>
+              <div>Age</div>
+              <Input {...register('Age')} />
+            </StyldRegisterFormItem>
+
+            <StyldRegisterFormItem>
+              <div>First Name</div>
               <Input
-                type="text"
-                value={register.id} //value에 상태값을 주고
-                onChange={handleForm} //상태값이 들어옴으로서 input 이 변경이 안 됨 이때 onchange함수가 등장
-                name="id"
+                {...register('First Name')}
               />
             </StyldRegisterFormItem>
 
             <StyldRegisterFormItem>
-              <div>name</div>
-              <Input
-                type="text"
-                value={register.firstName} //value에 상태값을 주고
-                onChange={handleForm} //상태값이 들어옴으로서 input 이 변경이 안 됨 이때 onchange함수가 등장
-                name="firstName"
-              />
+              <div>Height</div>
+              <Input {...register('Height')} />
             </StyldRegisterFormItem>
 
             <StyldRegisterFormItem>
-              <div>password</div>
-              <Input
-                type="text"
-                value={register.age} //value에 상태값을 주고
-                onChange={handleForm} //상태값이 들어옴으로서 input 이 변경이 안 됨 이때 onchange함수가 등장
-                name="age"
-              />
+              <div>Last Name</div>
+              <Input {...register('Last Name')} />
             </StyldRegisterFormItem>
 
-            <button
-              type="button"
-              onClick={handleWrite}
-            >
-              글쓰기
-            </button>
+            <StyldRegisterFormItem>
+              <div>Weight</div>
+              <Input {...register('Weight')} />
+            </StyldRegisterFormItem>
+
+            <StyldRegisterFormItem>
+              <div>Gender</div>
+              <input
+                {...register('gender')}
+                type="radio"
+                name="gender"
+                value="male"
+                id="male"
+              />
+              Male
+              <input
+                {...register('gender')}
+                type="radio"
+                name="gender"
+                value="female"
+                id="female"
+              />
+              Female
+            </StyldRegisterFormItem>
+
+            <StyldRegisterFormItem>
+              <div>Comment</div>
+              <Input {...register('Comment')} />
+            </StyldRegisterFormItem>
           </StyledRegisterForm>
+
+          <div className="register-form-button-box">
+            <Button
+              type="submit"
+              onClick={handleSubmit(onSubmit)}
+            >
+              ok
+            </Button>
+
+            <Button
+              onClick={() => {
+                console.log('취소');
+              }}
+            >
+              cancel
+            </Button>
+          </div>
         </StyledRegisterFormDiv>
       </SlidingPane>
     </>

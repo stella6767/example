@@ -13,7 +13,7 @@ const [
   LOAD_PATIENTS_FAILURE,
 ] = createRequestActionTypes('LOAD_PATIENTS');
 
-export const loadPostsAction = createAction(
+export const loadPatientsAction = createAction(
   LOAD_PATIENTS_REQUEST,
   (data) => data,
 );
