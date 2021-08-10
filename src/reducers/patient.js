@@ -7,11 +7,16 @@ import createFakeRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 
+const PATIENTS_LIST_INIT = 'PATIENTS_LIST_INIT';
+
 const [
   LOAD_PATIENTS_REQUEST,
   LOAD_PATIENTS_SUCCESS,
   LOAD_PATIENTS_FAILURE,
 ] = createRequestActionTypes('LOAD_PATIENTS');
+
+export const patientsListInitAction =
+  createAction(PATIENTS_LIST_INIT);
 
 export const loadPatientsAction = createAction(
   LOAD_PATIENTS_REQUEST,
@@ -40,6 +45,12 @@ const initialState = {
 
 const patient = handleActions(
   {
+    //초기화
+    [PATIENTS_LIST_INIT]: (state) => ({
+      ...state,
+      patientsPosts: [],
+    }),
+
     [LOAD_PATIENTS_REQUEST]: (
       state,
       { payload: data },
