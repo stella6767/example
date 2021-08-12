@@ -8,6 +8,7 @@ import React, {
   useState,
 } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -24,6 +25,20 @@ const Registration = memo(() => {
     isPaneOpenLeft: false,
     isPaneOpenBottom: false,
   });
+
+  // const { testData } = useSelector(
+  //   ({ test }) => ({
+  //     testData: test.patientsPosts,
+  //   }),
+  // );
+
+  //const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(loadPatientsAction());
+  //   console.log('더미데이터 최초 한번 받아옴');
+  //   //dispatch(loadPatientsAction(10));
+  // }, []);
 
   const { register, handleSubmit } = useForm();
 

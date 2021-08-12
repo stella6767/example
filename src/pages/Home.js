@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import AppLayout from '../components/AppLayout';
 import PatientInfo from '../components/PatientInfo';
 import { loadPatientsAction } from '../reducers/patient';
+import { testAction } from '../reducers/test';
 import { Global } from '../style';
 import { StyledMainDiv } from './style';
 
@@ -23,10 +24,17 @@ const Home = memo(() => {
     dispatch(loadPatientsAction(10));
   }, []);
 
+  const getConnect = () => {
+    dispatch(testAction());
+  };
+
   return (
     <>
       <Global />
       <AppLayout>
+        <button onClick={getConnect}>
+          Test 통신
+        </button>
         <StyledMainDiv>
           {patientsPosts.map((c) => (
             <PatientInfo

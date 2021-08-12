@@ -19,6 +19,59 @@ export const createRequestActionTypes = (
   return [REQUEST, SUCCESS, FAILURE];
 };
 
+export function createRequestSaga(type, request) {
+  const SUCCESS = type.replace(
+    /REQUEST/g,
+    'SUCCESS',
+  );
+  const FAILURE = type.replace(
+    /REQUEST/g,
+    'FAILURE',
+  );
+
+  return function* (action) {
+    yield put(startLoading(type)); //로딩 시작
+    //피라미터로 action을 받아 오면 액션의 정보를 조회할 수 있습니다.
+
+    console.log('request', request);
+
+    try {
+      const response = yield call(
+        request,
+        action.payload,
+      ); //api 호출
+      console.log(
+        'api 호출 성공: ',
+        type,
+        action,
+      );
+      console.log(
+        'response: ',
+        response,
+        'success',
+        SUCCESS,
+        'faliure',
+        FAILURE,
+      ); //promise 반환해주는 return 꼭 작성해주자..
+
+      yield put({
+        type: SUCCESS,
+        payload: response.data,
+      });
+    } catch (e) {
+      const errorData = e.response.data;
+      console.error('errorData는', errorData);
+
+      yield put({
+        type: FAILURE,
+        payload: errorData,
+        error: true,
+      });
+    }
+    yield put(finishLoading(type)); //로딩 끝
+  };
+}
+
 export default function createFakeRequestSaga(
   type,
   request,
